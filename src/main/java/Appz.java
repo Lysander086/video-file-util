@@ -2,9 +2,10 @@ import util.VideoUtil;
 
 public class Appz {
     public static void main(String[] args) {
-        String coursePath = "E:\\hdCvideos\\Vue Element+Node.js开发企业通用管理后台系统"; //要遍历课程的路径
-        // String coursePath = "D:\\test"; //要遍历课程的路径
+         String coursePath = "E:\\hdCvideos\\Vue Element+Node.js寮�鍙戜紒涓氶�氱敤绠＄悊鍚庡彴绯荤粺"; //瑕侀亶鍘嗚绋嬬殑璺緞
+        // // String coursePath = "D:\\test"; //瑕侀亶鍘嗚绋嬬殑璺緞
 
-        VideoUtil.invokeCalculate(coursePath);
+         VideoUtil.invokeCalculate(coursePath);
+//        System.out.println("hi");
     }
 }
