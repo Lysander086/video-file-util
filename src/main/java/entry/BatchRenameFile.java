@@ -1,7 +1,7 @@
 package entry;
 
 import lombok.SneakyThrows;
-import util.CreateFileUtil;
+import util.FileUtil;
 
 import java.io.File;
 
@@ -15,7 +15,7 @@ public class BatchRenameFile {
         System.out.println("BatchRenameFile start");
         batchRename(path);
         System.out.println("BatchRenameFile end");
-        CreateFileUtil.createFile(path + File.separator + "batch rename from " + containedKey + ".txt");
+        FileUtil.createFile(path + File.separator + "batch rename from " + containedKey + ".txt");
     }
 
     @SneakyThrows
