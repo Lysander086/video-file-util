@@ -2,7 +2,7 @@ package util;
 
 public class FileUtil {
     /*
-     * JavaÎÄ¼ş²Ù×÷ »ñÈ¡ÎÄ¼şÀ©Õ¹Ãû
+     * Javaæ–‡ä»¶æ“ä½œ è·å–æ–‡ä»¶æ‰©å±•å
      *
      *  Created on: 2011-8-2
      *      Author: blueeagle
@@ -18,7 +18,7 @@ public class FileUtil {
     }
 
     /*
-     * JavaÎÄ¼ş²Ù×÷ »ñÈ¡²»´øÀ©Õ¹ÃûµÄÎÄ¼şÃû
+     * Javaæ–‡ä»¶æ“ä½œ è·å–ä¸å¸¦æ‰©å±•åçš„æ–‡ä»¶å
      *
      *  Created on: 2011-8-2
      *      Author: blueeagle

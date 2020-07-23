@@ -1,5 +1,6 @@
 package util;
 
+import entry.Appz;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.MultimediaInfo;
@@ -14,6 +15,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
+
+;
 
 public class VideoUtil {
 
@@ -36,11 +39,10 @@ public class VideoUtil {
     public static void invokeCalculate(String coursePath) {
 
         System.out.println("Calculating");
-        try (BufferedWriter writer =
-                     new BufferedWriter(new FileWriter(coursePath + File.separator + "µ±Ç°Ä¿Â¼ÊÓÆµÊ±³¤.txt"));) {
+        try {
             long totalTime = VideoUtil.writeResult(coursePath);
-            writer.write("total hours: " + VideoUtil.getFormattedDuration(totalTime));
-            System.out.println("Ê£ÓàÊ±³¤:" + VideoUtil.getFormattedDuration(totalTime));
+//            writer.write("total hours: " + VideoUtil.getFormattedDuration(totalTime));
+            System.out.println("remaining hours:" + VideoUtil.getFormattedDuration(totalTime));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,26 +50,32 @@ public class VideoUtil {
     }
 
     public static long writeResult(String path) throws IOException {
-        File file = new File(path);  //»ñÈ¡Æäfile¶ÔÏó
+        File file = new File(path);  //è·å–å…¶fileå¯¹è±¡
         File[] files = file.listFiles();
         long totalTime = 0;
         assert files != null;
         for (File thing : files) {
-            if (thing.getName().contains("finished"))
+            String fileName = thing.getName();
+            if (!thing.isDirectory() && fileName.contains("finished") || fileName.contains("fff"))
                 return 0;
         }
+        // if a dir named archivez or finished, videos under this dir would not be counted
         for (File thing : files) {
-            if (thing.isDirectory() && !thing.getName().equals("archivez")) {
+            if (thing.isDirectory() && !(thing.getName().equals("archivez") || thing.getName().equals("finished"))) {
                 totalTime += writeResult(thing.getAbsolutePath());
             }
         }
-        // »ñÈ¡µ±Ç°Ä¿Â¼ÏÂµÄÊÓÆµĞÅÏ¢
+        // è·å–å½“å‰ç›®å½•ä¸‹çš„è§†é¢‘ä¿¡æ¯
         List<MultimediaInfo> multimediaInfoList = getMediaInfo(files);
-        // Èç¹ûµ±Ç°Ä¿Â¼ÏÂÃ»ÓĞÊÓÆµ, ÄÇÖ±½Ó·µ»Ø×ÓÄ¿Â¼µÄÈ«²¿ÊÓÆµÊ±³¤, ½áÊøµİ¹é
-        if (multimediaInfoList == null) return totalTime;
 
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path + File.separator + "å½“å‰ç›®å½•è§†é¢‘æ—¶é•¿(åŒ…æ‹¬å­ç›®å½•).txt"));
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(path + File.separator + "µ±Ç°Ä¿Â¼ÊÓÆµÊ±³¤.txt"));
+        // å¦‚æœå½“å‰ç›®å½•ä¸‹æ²¡æœ‰è§†é¢‘, é‚£ç›´æ¥è¿”å›å­ç›®å½•çš„å…¨éƒ¨è§†é¢‘æ—¶é•¿, ç»“æŸé€’å½’
+        if (multimediaInfoList == null) {
+            writer.write("total hours: " + VideoUtil.getFormattedDuration(totalTime));
+            writer.close();
+            return totalTime;
+        }
         writer.write("current dir: " + file.getName() + "\n");
 
         AtomicLong allDuration = new AtomicLong(0L);
@@ -75,8 +83,8 @@ public class VideoUtil {
         multimediaInfoList.forEach(everyInfo -> {
             try {
                 allDuration.addAndGet(everyInfo.getDuration());
-                writer.write(files[i.getAndIncrement()].getName()
-                        + " " + VideoUtil.getFormattedDuration(everyInfo.getDuration())
+                writer.write(VideoUtil.getFormattedDuration(everyInfo.getDuration()) + " videoName: " + files[i.getAndIncrement()].getName()
+                        + " "
                         + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -84,11 +92,12 @@ public class VideoUtil {
         });
         totalTime += allDuration.longValue();
         writer.write("total hours: " + VideoUtil.getFormattedDuration(totalTime));
+        if (Appz.DEBUGGING) System.out.println(VideoUtil.getFormattedDuration(totalTime));
         writer.close();
-        return allDuration.longValue();
+        return totalTime;
     }
 
-    // ¶ÔÓÚÂ·¾¶ÏÂµÄËùÓĞÊÓÆµÎÄ¼ş»ñÈ¡ÊÓÆµĞÅÏ¢
+    // å¯¹äºè·¯å¾„ä¸‹çš„æ‰€æœ‰è§†é¢‘æ–‡ä»¶è·å–è§†é¢‘ä¿¡æ¯
     public static List<MultimediaInfo> getMediaInfo(File[] files) {
 
         File[] videoFiles = Arrays.stream(files).filter(everyFile -> everyFile.isFile() && SuffixValidTest.isValid(everyFile.getName())).toArray(File[]::new);

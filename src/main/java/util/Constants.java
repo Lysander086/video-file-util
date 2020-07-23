@@ -2,7 +2,7 @@ package util;
 
 
 public class Constants {
-    //ÊÓÆµÀàĞÍ
+    //è§†é¢‘ç±»å‹
     public static final String RM = "rm";
     public static final String RMVB = "rmvb";
     public static final String WMV = "wmv";
