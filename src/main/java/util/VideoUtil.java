@@ -16,8 +16,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
-;
-
 public class VideoUtil {
 
     public static String getFormattedDuration(long milliseconds) {

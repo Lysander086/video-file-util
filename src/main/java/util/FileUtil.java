@@ -32,4 +32,13 @@ public class FileUtil {
         }
         return filename;
     }
+
+
+    public static boolean ifContainKeyWords(String fileName, String[] containedKey) {
+        for (String name : containedKey) {
+            if (fileName.contains(name))
+                return true;
+        }
+        return false;
+    }
 }
