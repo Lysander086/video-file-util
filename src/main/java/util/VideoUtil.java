@@ -1,6 +1,6 @@
 package util;
 
-import entry.Appz;
+import entry.CalculateCourseLength;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.MultimediaInfo;
@@ -90,7 +90,7 @@ public class VideoUtil {
         });
         totalTime += allDuration.longValue();
         writer.write("total hours: " + VideoUtil.getFormattedDuration(totalTime));
-        if (Appz.DEBUGGING) System.out.println(VideoUtil.getFormattedDuration(totalTime));
+        if (CalculateCourseLength.DEBUGGING) System.out.println(VideoUtil.getFormattedDuration(totalTime));
         writer.close();
         return totalTime;
     }

@@ -1,21 +1,19 @@
 package entry;
 
+import util.DeleteDirectory;
 import util.FileUtil;
 
 import java.io.File;
 
-public class CleanResultFile {
-    public static final String[] CONTAINED_KEY = new String[]{"当前目录视频", "remaining hour"};
+public class BatchDeleteFile {
+    public static final String[] CONTAINED_KEY = new String[]{"MACOSX", "DS_Store"};
     public static final String fileEXTENSION = "txt";
-    public static String path = "";
+    public static String path = "C:\\Users\\inz\\Desktop\\winDev\\myProj\\vuebookWebApp\\开发资源（更新至第十章）";
 //    public static String path = "D:\\test";
 
     public static void main(String[] args) {
-        System.out.println("cleaning start");
-        if (!"".equals(path)) cleanFiles(path);
-        else {
-            cleanFiles(Appz.coursePath);
-        }
+        System.out.println("cleaning start" + path);
+        cleanFiles(path);
         System.out.println("cleaning end");
     }
 
@@ -26,7 +24,6 @@ public class CleanResultFile {
         assert files != null;
         for (File thing : files) {
             if (thing.isFile()
-                    && fileEXTENSION.equals(FileUtil.getExtensionName(thing.getName()))
                     && FileUtil.ifContainKeyWords(thing.getName(), CONTAINED_KEY)) {
                 String fileIndicator = thing.getAbsolutePath() + File.separator + thing.getName();
                 if (thing.delete())
@@ -35,6 +32,13 @@ public class CleanResultFile {
 
             } else if (thing.isDirectory()) {
                 cleanFiles(thing.getAbsolutePath());
+                if (FileUtil.ifContainKeyWords(thing.getName(), CONTAINED_KEY)) {
+                    String fileIndicator = thing.getAbsolutePath() + File.separator + thing.getName();
+                    if (DeleteDirectory.deleteDir(thing)) {
+                        System.out.println(fileIndicator + "已被删除");
+                    }
+                }
+
             }
         }
     }
