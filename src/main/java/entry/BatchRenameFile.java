@@ -6,10 +6,8 @@ import util.FileUtil;
 import java.io.File;
 
 public class BatchRenameFile {
-    public static final String containedKey = "【海量资源尽在250java.cn】";
-    //    public static final String containedKey = "250java.cn";
-    //    public static String path = "";
-    public static String path = "E:\\hdCvideos\\frontEnd\\再学JavaScript ES(6-11)全版本语法大全";
+    public static final String containedKey = "NameToRemove";
+    public static String path = "YourPathHere";
 
     public static void main(String[] args) {
         System.out.println("BatchRenameFile start");

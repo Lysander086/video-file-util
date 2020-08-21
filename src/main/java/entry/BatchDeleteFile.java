@@ -7,8 +7,8 @@ import java.io.File;
 
 public class BatchDeleteFile {
     public static final String[] CONTAINED_KEY = new String[]{"MACOSX", "DS_Store"};
-    public static final String fileEXTENSION = "txt";
-    public static String path = "C:\\Users\\inz\\Desktop\\winDev\\myProj\\vuebookWebApp\\开发资源（更新至第十章）";
+//    public static final String fileEXTENSION = "txt";
+    public static String path = "YourPathHere";
 //    public static String path = "D:\\test";
 
     public static void main(String[] args) {
