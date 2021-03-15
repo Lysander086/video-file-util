@@ -54,9 +54,13 @@ public class VideoUtil {
         assert files != null;
         for (File thing : files) {
             String fileName = thing.getName();
-            if (!thing.isDirectory() && fileName.contains("finished") || fileName.contains("fff"))
+            if (!thing.isDirectory() && fileName.contains("finished")
+                    || fileName.contains("fff")
+                    || fileName.contains("gitignore")
+            )
                 return 0;
         }
+
         // if a dir named archivez or finished, videos under this dir would not be counted
         for (File thing : files) {
             if (thing.isDirectory() && !(thing.getName().equals("archivez") || thing.getName().equals("finished"))) {

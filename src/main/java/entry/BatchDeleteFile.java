@@ -6,9 +6,9 @@ import util.FileUtil;
 import java.io.File;
 
 public class BatchDeleteFile {
-    public static final String[] CONTAINED_KEY = new String[]{"MACOSX", "DS_Store"};
+    public static final String[] CONTAINED_KEY = new String[]{"当前目录"};
 //    public static final String fileEXTENSION = "txt";
-    public static String path = "YourPathHere";
+    public static String path = " ";
 //    public static String path = "D:\\test";
 
     public static void main(String[] args) {
