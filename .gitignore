@@ -1,5 +1,12 @@
-#
-**/Appz.java
+# java.gitignore + frontend.gitignore
+# secret files
+**/webDemo/**
+# front end
+**/.env
+
+**/.mvn
+mvnw
+mvnw.cmd
 
 HELP.md
 target/
@@ -17,20 +24,52 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+**/.idea
 *.iws
 *.eml
 *.iml
 *.ipr
+*.jar
 
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/dist/
+**/dist/
 /nbdist/
 /.nb-gradle/
 build/
 
 ### VS Code ###
 .vscode/
-src/main/resources/application-dev.properties
+### for spring boot local dev file
+**/src/main/resources/application-dev.properties
+
+**/node_modules
+# files under this dir will all be ignored
+**/archivez
+**/.svn/
+
+
+# frontend gitignore
+.DS_Store
+/dist
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+
+package-lock.json

@@ -55,7 +55,7 @@ public class VideoUtil {
         for (File thing : files) {
             String fileName = thing.getName();
             if (!thing.isDirectory() && fileName.contains("finished")
-                    || fileName.contains("fff")
+                    // || fileName.contains("fff")
                     || fileName.contains("gitignore")
             )
                 return 0;
@@ -70,7 +70,8 @@ public class VideoUtil {
         // 获取当前目录下的视频信息
         List<MultimediaInfo> multimediaInfoList = getMediaInfo(files);
 
-        BufferedWriter writer = new BufferedWriter(new FileWriter(path + File.separator + "当前目录视频时长(包括子目录).txt"));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path + File.separator + "video length of current dir ( including its sub dir ).txt"));
+        // BufferedWriter writer = new BufferedWriter(new FileWriter(path + File.separator + "当前目录视频时长(包括子目录).txt"));
 
         // 如果当前目录下没有视频, 那直接返回子目录的全部视频时长, 结束递归
         if (multimediaInfoList == null) {

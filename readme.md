@@ -1,3 +1,13 @@
+
+## Java snippets for some utilities
+- Java files under the entry package are the entries for the app
+    - you can judge the usage of the file iva its Java class name
+    
+- features that are implemented so far
+    1. batch delete files and directories that has specified arr(keywords) under the specified dir.
+    2. calculate video length of specified dir
+    2. batch replace str of files of the specified dir
+
 ## java toolkit 工具集
 
 entry目录下的文件为app开启入口
@@ -9,3 +19,4 @@ entry目录下的文件为app开启入口
 - 批量删除某目录下包含关键字的文件和文件夹
 - 计算文件夹下的视频长度
 - 批量重命名某目录下的文件夹
+
