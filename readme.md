@@ -1,7 +1,7 @@
 
 ## Java snippets for some utilities
 - Java files under the entry package are the entries for the app
-    - you can judge the usage of the file iva its Java class name
+    - you can judge the usage of the file via its Java class name
     
 - features that are implemented so far
     1. batch delete files and directories that has specified arr(keywords) under the specified dir.
