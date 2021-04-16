@@ -20,14 +20,16 @@ public class VideoUtil {
 
     public static String getFormattedDuration(long milliseconds) {
         StringBuilder sb = new StringBuilder();
-        long mss = milliseconds / 1000;
-        long days = mss / (60 * 60 * 24);
-        long hours = (mss % (60 * 60 * 24)) / (60 * 60);
-        long minutes = (mss % (60 * 60)) / 60;
-        long seconds = mss % 60;
+        long sec = milliseconds / 1000;
+        long days = sec / (60 * 60 * 24);
+        long hours = (sec % (60 * 60 * 24)) / (60 * 60);
+        long minutes = (sec % (60 * 60)) / 60;
+        long seconds = sec % 60;
         DecimalFormat format = new DecimalFormat("00");
         if (days > 0 || hours > 0) {
-            sb.append(format.format(hours)).append(":").append(format.format(minutes)).append(":").append(format.format(seconds));
+            sb.append(days).append( "d ")
+                    .append(format.format(hours)).append(":").append(format.format(minutes)).append(":").append(format.format(seconds));
+
         } else {
             sb.append(format.format(minutes)).append(":").append(format.format(seconds));
         }
@@ -40,7 +42,7 @@ public class VideoUtil {
         try {
             long totalTime = VideoUtil.writeResult(coursePath);
 //            writer.write("total hours: " + VideoUtil.getFormattedDuration(totalTime));
-            System.out.println("remaining hours:" + VideoUtil.getFormattedDuration(totalTime));
+            System.out.println("remaining hours: " + VideoUtil.getFormattedDuration(totalTime));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,13 +54,14 @@ public class VideoUtil {
         File[] files = file.listFiles();
         long totalTime = 0;
         assert files != null;
-        for (File thing : files) {
-            String fileName = thing.getName();
-            if (!thing.isDirectory() && fileName.contains("finished")
-                    // || fileName.contains("fff")
+
+        for (File f : files) {
+            String fileName = f.getName();
+            if (!f.isDirectory() && fileName.contains("finished")
                     || fileName.contains("gitignore")
-            )
+            ) {
                 return 0;
+            }
         }
 
         // if a dir named archivez or finished, videos under this dir would not be counted
