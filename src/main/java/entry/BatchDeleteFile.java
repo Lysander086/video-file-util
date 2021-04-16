@@ -1,5 +1,6 @@
 package entry;
 
+import com.mysql.jdbc.StringUtils;
 import util.DeleteDirectory;
 import util.FileUtil;
 
@@ -18,6 +19,8 @@ public class BatchDeleteFile {
     }
 
     static void cleanFiles(String path) {
+        if (StringUtils.isNullOrEmpty(path)) {
+            System.out.println("Please specify your path. 请输入你的操作路径"); return;}
         File file = new File(path);  //获取其file对象
         File[] files = file.listFiles();
 
@@ -27,15 +30,15 @@ public class BatchDeleteFile {
                     && FileUtil.ifContainKeyWords(thing.getName(), CONTAINED_KEY)) {
                 String fileIndicator = thing.getAbsolutePath() + File.separator + thing.getName();
                 if (thing.delete())
-                    System.out.println(fileIndicator + "已被删除");
-                else System.out.println(fileIndicator + "文件删除失败");
+                    System.out.println(fileIndicator + " 已被删除");
+                else System.out.println(fileIndicator + " 文件删除失败");
 
             } else if (thing.isDirectory()) {
                 cleanFiles(thing.getAbsolutePath());
                 if (FileUtil.ifContainKeyWords(thing.getName(), CONTAINED_KEY)) {
                     String fileIndicator = thing.getAbsolutePath() + File.separator + thing.getName();
                     if (DeleteDirectory.deleteDir(thing)) {
-                        System.out.println(fileIndicator + "已被删除");
+                        System.out.println(fileIndicator + " 已被删除");
                     }
                 }
 
