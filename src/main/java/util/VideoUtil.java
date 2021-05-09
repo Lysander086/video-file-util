@@ -115,6 +115,7 @@ public class VideoUtil {
             try {
                 return encoder.getInfo(every);
             } catch (EncoderException e) {
+                System.out.println("The directory name: \"" + every.getName() + "\" may be inappropriate for parsing length. Try to replace some special characters of the specified file or dir name. ");
                 e.printStackTrace();
             }
             return null;

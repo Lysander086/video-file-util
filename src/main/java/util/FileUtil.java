@@ -6,9 +6,6 @@ import java.io.IOException;
 public class FileUtil {
     /*
      * Java文件操作 获取文件扩展名
-     *
-     *  Created on: 2011-8-2
-     *      Author: blueeagle
      */
     public static String getExtensionName(String filename) {
         if ((filename != null) && (filename.length() > 0)) {
@@ -22,9 +19,6 @@ public class FileUtil {
 
     /*
      * Java文件操作 获取不带扩展名的文件名
-     *
-     *  Created on: 2011-8-2
-     *      Author: blueeagle
      */
     public static String getFileNameNoEx(String filename) {
         if ((filename != null) && (filename.length() > 0)) {
@@ -89,7 +83,7 @@ public class FileUtil {
         if (!destDirName.endsWith(File.separator)) {
             destDirName = destDirName + File.separator;
         }
-        //创建目录
+
         if (dir.mkdirs()) {
             System.out.println("创建目录" + destDirName + "成功.");
             return true;
