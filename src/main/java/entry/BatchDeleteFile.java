@@ -30,7 +30,7 @@ public class BatchDeleteFile {
                     && FileUtil.ifContainKeyWords(thing.getName(), CONTAINED_KEY)) {
                 String fileIndicator = thing.getAbsolutePath() + File.separator + thing.getName();
                 if (thing.delete())
-                    System.out.println(fileIndicator + " 已被删除");
+                    System.out.println(fileIndicator + "    has been deleted.");
                 else System.out.println(fileIndicator + " 文件删除失败");
 
             } else if (thing.isDirectory()) {
