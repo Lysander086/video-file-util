@@ -1,3 +1,5 @@
+## Notes
+- the python script is not tested yet. 20210529
 
 ## Java snippets for some utilities
 - Java files under the entry package are the entries for the app
