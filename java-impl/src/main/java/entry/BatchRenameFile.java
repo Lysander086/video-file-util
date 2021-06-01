@@ -7,19 +7,23 @@ import java.io.File;
 
 public class BatchRenameFile {
     //    public static final String containedKey = "( )"; // name to remove
-    public static final String[] containedKeyArr = new String[]{" "};
-    public static String path = " "; // your video path here
-    public static final String replacedKey = ""; // name to replace
+    public static final String[] containVal = new String[]{"[(|)]"};
+    public static String path = "C:\\Users\\rdc\\Desktop\\1fm\\spring cloud  微服务"; // your video path here
+    public static final String replacedVal = ""; // name to replace
+    public static final boolean regexSupport = false;
     public static final boolean toGenerateFile = false; // whether create a text file in specified path
 
     public static void main(String[] args) {
         System.out.println("BatchRenameFile start");
         batchRename(path);
         System.out.println("BatchRenameFile end");
-        for (String containedKey : containedKeyArr) {
+        for (String containedKey : containVal) {
             if (toGenerateFile)
                 FileUtil.createFile(path + File.separator + "batch rename from " + containedKey + ".txt");
         }
+        String str = "abc(a)cba";
+        String str2 = str.replaceAll("[(|)]", "b");
+        System.out.println(str2);
     }
 
     @SneakyThrows
@@ -33,9 +37,9 @@ public class BatchRenameFile {
         for (File thing : files) {
             if (thing.isDirectory() && !thing.getName().contains("git")) batchRename(thing.getAbsolutePath());
             String oldName = thing.getName();
-            for (String containedKey : containedKeyArr) {
-                if (oldName.contains(containedKey)) {
-                    newName = oldName.replaceAll(containedKey, replacedKey);
+            for (String containedVal : containVal) {
+                if (regexSupport || oldName.contains(containedVal)) {
+                    newName = oldName.replaceAll(containedVal, replacedVal);
                     String fileNewName =
                             thing.getAbsolutePath().substring(0, thing.getAbsolutePath().lastIndexOf(File.separator)) + File.separator + newName;
                     thingWithNewName = new File(fileNewName);
