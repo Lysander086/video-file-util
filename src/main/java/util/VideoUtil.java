@@ -26,12 +26,15 @@ public class VideoUtil {
         long minutes = (sec % (60 * 60)) / 60;
         long seconds = sec % 60;
         DecimalFormat format = new DecimalFormat("00");
-        if (days > 0 || hours > 0) {
-            sb.append(days).append( "d ")
-                    .append(format.format(hours)).append(":").append(format.format(minutes)).append(":").append(format.format(seconds));
-
+        if (days > 0) {
+            sb.append(days).append("d ")
+                    .append(format.format(hours)).append("h ").append(format.format(minutes)).append("m ")
+                    // .append(format.format(seconds)).append("s ")
+            ;
         } else {
-            sb.append(format.format(minutes)).append(":").append(format.format(seconds));
+            sb.append(format.format(hours)).append("h ").append(format.format(minutes)).append("m ")
+                    // .append(format.format(seconds)).append("s " )
+            ;
         }
         return sb.toString();
     }
@@ -41,7 +44,6 @@ public class VideoUtil {
         System.out.println("Calculating");
         try {
             long totalTime = VideoUtil.writeResult(coursePath);
-//            writer.write("total hours: " + VideoUtil.getFormattedDuration(totalTime));
             System.out.println("remaining hours: " + VideoUtil.getFormattedDuration(totalTime));
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,17 +59,17 @@ public class VideoUtil {
 
         for (File f : files) {
             String fileName = f.getName();
-            if (!f.isDirectory() && fileName.contains("finished")
-                    || fileName.contains("gitignore")
+            if (!f.isDirectory() &&
+                    (fileName.contains("finished") || fileName.contains("gitignore"))
             ) {
                 return 0;
             }
         }
 
         // if a dir named archivez or finished, videos under this dir would not be counted
-        for (File thing : files) {
-            if (thing.isDirectory() && !(thing.getName().equals("archivez") || thing.getName().equals("finished"))) {
-                totalTime += writeResult(thing.getAbsolutePath());
+        for (File f : files) {
+            if (f.isDirectory() && !f.getName().equals("finished")) {
+                totalTime += writeResult(f.getAbsolutePath());
             }
         }
         // 获取当前目录下的视频信息
