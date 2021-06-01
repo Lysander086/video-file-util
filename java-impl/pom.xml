@@ -44,6 +44,13 @@
             <systemPath>${basedir}/lib/jave-1.0.2.jar</systemPath>
         </dependency>
 
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/it.sauronsoftware/jave &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>it.sauronsoftware</groupId>-->
+<!--            <artifactId>jave</artifactId>-->
+<!--            <version>1.0.2</version>-->
+<!--        </dependency>-->
+
     </dependencies>
 
     <build>
