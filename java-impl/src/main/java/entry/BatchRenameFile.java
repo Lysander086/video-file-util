@@ -5,6 +5,7 @@ import util.FileUtil;
 
 import java.io.File;
 
+/* "([|])" */
 public class BatchRenameFile {
     //    public static final String containedKey = "( )"; // name to remove
     public static final String[] containVal = new String[]{"[QQ微信352852792]"};
@@ -29,21 +30,24 @@ public class BatchRenameFile {
         File[] files = file.listFiles();
 
         assert files != null;
-        String newName = "";
-        File thingWithNewName;
-        for (File thing : files) {
-            if (thing.isDirectory() && !thing.getName().contains("git")) batchRename(thing.getAbsolutePath());
-            String oldName = thing.getName();
+        String newName;
+        File newNamedFile;
+        for (File f : files) {
+            if (f.isDirectory() && !f.getName().contains("git")) batchRename(f.getAbsolutePath());
+            String oldName = f.getName();
             for (String containedVal : containVal) {
                 if (regexSupport || oldName.contains(containedVal)) {
                     newName = oldName.replaceAll(containedVal, replacedVal);
                     String fileNewName =
-                            thing.getAbsolutePath().substring(0, thing.getAbsolutePath().lastIndexOf(File.separator)) + File.separator + newName;
-                    thingWithNewName = new File(fileNewName);
-                    if (thing.renameTo(thingWithNewName)) {
-                        System.out.println("successfully get thingWithNewName: " + thingWithNewName.getName());
+                            f.getAbsolutePath().substring(0, f.getAbsolutePath().lastIndexOf(File.separator)) + File.separator + newName;
+                    newNamedFile = new File(fileNewName);
+                    if (f.renameTo(newNamedFile)) {
+                        if (regexSupport) if (!oldName.equals(newName))
+                            System.out.println("successfully get newNamedFile: " + fileNewName);
+                        else
+                            System.out.println("successfully get newNamedFile: " + fileNewName);
                     } else {
-                        System.out.println(String.format("!!! Error: file %s may be in use, skipped renaming.", thing.getName()));
+                        System.out.println(String.format("!!! Error: file %s may be in use, skipped renaming.", f.getName()));
                     }
                 }
             }
