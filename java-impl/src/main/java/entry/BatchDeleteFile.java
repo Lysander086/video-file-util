@@ -20,24 +20,26 @@ public class BatchDeleteFile {
 
     static void cleanFiles(String path) {
         if (StringUtils.isNullOrEmpty(path)) {
-            System.out.println("Please specify your path. 请输入你的操作路径"); return;}
+            System.out.println("Please specify your path. 请输入你的操作路径");
+            return;
+        }
         File file = new File(path);  //获取其file对象
         File[] files = file.listFiles();
 
         assert files != null;
-        for (File thing : files) {
-            if (thing.isFile()
-                    && FileUtil.ifContainKeyWords(thing.getName(), CONTAINED_KEY)) {
-                String fileIndicator = thing.getAbsolutePath() + File.separator + thing.getName();
-                if (thing.delete())
+        for (File f : files) {
+            if (f.isFile()
+                    && FileUtil.ifContainKeyWords(f.getName(), CONTAINED_KEY)) {
+                String fileIndicator = f.getName();
+                if (f.delete())
                     System.out.println(fileIndicator + "    has been deleted.");
                 else System.out.println(fileIndicator + " 文件删除失败");
 
-            } else if (thing.isDirectory()) {
-                cleanFiles(thing.getAbsolutePath());
-                if (FileUtil.ifContainKeyWords(thing.getName(), CONTAINED_KEY)) {
-                    String fileIndicator = thing.getAbsolutePath() + File.separator + thing.getName();
-                    if (DeleteDirectory.deleteDir(thing)) {
+            } else if (f.isDirectory()) {
+                cleanFiles(f.getAbsolutePath());
+                if (FileUtil.ifContainKeyWords(f.getName(), CONTAINED_KEY)) {
+                    String fileIndicator = f.getAbsolutePath() + File.separator + f.getName();
+                    if (DeleteDirectory.deleteDir(f)) {
                         System.out.println(fileIndicator + " 已被删除");
                     }
                 }
